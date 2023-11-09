@@ -13,7 +13,6 @@ export default defineConfig({
     }),
   ],
   envDir: "../",
-  envPrefix: "FUNC_",
   build: {
     outDir: "../dist/functions",
     emptyOutDir: true,
