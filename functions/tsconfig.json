@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": ["src", "vite.config.ts"]
+}
