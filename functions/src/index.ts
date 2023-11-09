@@ -5,6 +5,12 @@ import { onRequest } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2/options";
 
 import passport from "./passport";
+import {
+  DISCORD_CALLBACK_URL,
+  DISCORD_CLIENT_ID,
+  DISCORD_CLIENT_SECRET,
+} from "./config";
+import { listUsers } from "./store";
 
 setGlobalOptions({ maxInstances: 10 });
 
@@ -37,6 +43,11 @@ router.get("/pong", (r, res) => {
   res.send("Ping!");
 });
 
+router.get("/users", async (r, res) => {
+  const users = await listUsers();
+  res.json(users);
+});
+
 router.get("/auth/discord", passport.authenticate("discord"));
 router.get(
   "/auth/discord/callback",
@@ -55,5 +66,10 @@ app.use("/**", (r, res) => {
 });
 
 export default {
-  login: onRequest(app),
+  login: onRequest(
+    {
+      secrets: [DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_CALLBACK_URL],
+    },
+    app
+  ),
 };

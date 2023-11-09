@@ -3,10 +3,8 @@
   "private": true,
   "scripts": {
     "build": "vite build --ssr",
-    "watch-build": "npm run build -- --watch",
-    "emulate": "firebase emulators:start --only functions",
     "watch": "nodemon --watch src --ext ts --exec npm run serve",
-    "serve": "npm run build && firebase emulators:start --only functions",
+    "serve": "npm run build && firebase emulators:start --only functions,firestore",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "logs": "firebase functions:log"

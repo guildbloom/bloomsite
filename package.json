@@ -3,6 +3,7 @@
     "hosting",
     "functions"
   ],
+  "type": "module",
   "scripts": {
     "dev": "npm run dev -w hosting",
     "build": "npm run build -ws",
