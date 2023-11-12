@@ -1,7 +1,11 @@
 {
-    "extends": "../tsconfig.json",
-    "include": ["src", "vite.config.ts"],
-    "compilerOptions": {
-        "jsx": "react-jsx"
+  "extends": "../tsconfig.json",
+  "include": ["src", "vite.config.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@src/*": ["src/*"]
     }
+  }
 }

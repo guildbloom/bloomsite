@@ -13,6 +13,7 @@
     "local-deploy": "firebase deploy"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.201",
     "@vitejs/plugin-react": "^4.1.1",
     "concurrently": "^8.2.2",
     "lerna": "^7.4.2",
@@ -21,5 +22,8 @@
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
     "vite-plugin-copy": "^0.1.6"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

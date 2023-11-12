@@ -1,0 +1,8 @@
+:root {
+    --primary: #4872B0;
+    --primaryAlt: #EFF2F3;
+    --primaryHover: #264778;
+    --themeLight: #EFF2F3;
+
+    --boxShadow: 0px 5px 10px rgba(0,0,0,0.2);
+}
