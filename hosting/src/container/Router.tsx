@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RouterOutlet />,
     loader: async () => {
-      await checkAuthStatus();
+      await checkAuthStatus(false);
       return null;
     },
     children: [
