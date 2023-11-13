@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("../views/Home2/Home"),
+        lazy: () => import("../views/Home/Home"),
       },
       {
         path: "help",
