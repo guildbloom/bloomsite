@@ -1,4 +1,11 @@
 import tags, { Flex } from "react-elevated-emotion";
+import {
+  useNavigate,
+  NavigateFunction,
+  To,
+  useLocation,
+} from "react-router-dom";
+
 import { mediaQuery } from "../helpers/breakpoints";
 
 import { css } from "@emotion/react";
@@ -6,15 +13,8 @@ import { primary } from "../variables";
 import { Fragment, ReactNode, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "./Button";
-import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import {
-  useNavigate,
-  NavigateFunction,
-  To,
-  useLocation,
-} from "react-router-dom";
+import { Button } from "./Button";
 
 type NavbarProps = {
   logo?: any;
@@ -30,7 +30,7 @@ type NavbarProps = {
 };
 
 export const Navbar = tags.div<NavbarProps>({
-  ignore: ["logo", "title", "actions"],
+  ignore: ["logo", "title", "links", "actions"],
   defaultProps({ links = [], ...props }) {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
@@ -47,8 +47,9 @@ export const Navbar = tags.div<NavbarProps>({
         <Button
           outline
           active={
-            (to === "/" && location.pathname === "/") ??
-            location.pathname.startsWith(to.toString())
+            location.pathname === "/"
+              ? to === "/"
+              : to !== "/" && location.pathname.startsWith(to.toString())
           }
           sx={{ borderColor: "transparent" }}
           onClick={() => onClick(to)}
@@ -80,7 +81,7 @@ export const Navbar = tags.div<NavbarProps>({
             ) : null}
 
             {basicLinks.length ? (
-              <Flex className="actions-desktop" align="center">
+              <Flex className="actions-desktop" align="center" gap={8}>
                 {basicLinks.map((el, key) => (
                   <Fragment key={key}>{el}</Fragment>
                 ))}
@@ -92,7 +93,7 @@ export const Navbar = tags.div<NavbarProps>({
 
           <Flex align="center" gap={16}>
             {floatingLinks.length ? (
-              <Flex className="actions-desktop" align="center">
+              <Flex className="actions-desktop" align="center" gap={8}>
                 {floatingLinks.map((el, key) => (
                   <Fragment key={key}>{el}</Fragment>
                 ))}

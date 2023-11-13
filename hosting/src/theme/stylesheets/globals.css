@@ -16,22 +16,22 @@ html, body {
 /* 576px, 768px, 992px, and 1200px */
 @media screen and (min-width: 576px) {
     #root {
-        max-width: 576px;
-    }
-}
-@media screen and (min-width: 992px) {
-    #root {
-        max-width: 992px;
+        max-width: 566px;
     }
 }
 @media screen and (min-width: 768px) {
     #root {
-        max-width: 768px;
+        max-width: 758px;
+    }
+}
+@media screen and (min-width: 992px) {
+    #root {
+        max-width: 982px;
     }
 }
 @media screen and (min-width: 1200px) {
     #root {
-        max-width: 1200px;
+        max-width: 1000px;
     }
 }
 

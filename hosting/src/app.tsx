@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 import "./firebase";
 
 import "./theme/stylesheets/index.css";
@@ -9,7 +10,17 @@ import { SuperThemeProvider } from "react-elevated-emotion";
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-  <SuperThemeProvider>
-    <Router />
-  </SuperThemeProvider>
+  <MetaMaskUIProvider
+    debug
+    sdkOptions={{
+      dappMetadata: {
+        name: "GuildBloom",
+        url: location.href,
+      },
+    }}
+  >
+    <SuperThemeProvider>
+      <Router />
+    </SuperThemeProvider>
+  </MetaMaskUIProvider>
 );

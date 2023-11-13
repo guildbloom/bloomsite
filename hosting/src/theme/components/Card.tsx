@@ -12,17 +12,20 @@ export const CardText = tags.p({})({
 
 type FigureProps = {
   outline?: boolean;
+  float?: boolean;
 };
 
-export const CardFigure = tags.div<FigureProps>({})(({ outline = true }) => ({
+export const CardFigure = tags.div<FigureProps>({
+  ignore: ["outline", "float"],
+})(({ outline = false }) => ({
   label: "card-figure",
-  width: 70,
-  height: 70,
   display: "inline-flex",
   justifyContent: "center",
   alignItems: "center",
   ...(outline
     ? {
+        width: 70,
+        height: 70,
         border: "2px solid transparent",
         borderColor: primary,
         borderStyle: "dashed",
@@ -37,29 +40,32 @@ export const Card = tags.div({
     const figure = Children.toArray(props.children)
       .filter((child: any) => child.type.displayName === CardFigure.displayName)
       .at(0);
+
     const elements = Children.toArray(props.children).filter(
       (child: any) => child.type.displayName !== CardFigure.displayName
     );
+
     return figure
       ? {
           children: (
-            <Flex align="center" gap={16}>
-              <Flex>{figure}</Flex>
+            <Flex align="center" gap={16} wrap="wrap">
+              {!(figure as any).props.float ? <Flex>{figure}</Flex> : null}
               <Flex column fill>
                 {elements.map((el, key) => (
                   <Fragment key={key}>{el}</Fragment>
                 ))}
               </Flex>
+              {(figure as any).props.float ? <Flex>{figure}</Flex> : null}
             </Flex>
           ),
         }
       : { children: props.children };
   },
-})(({ theme }) => ({
+})(({ theme, variant }) => ({
   label: "card",
-  background: theme.light,
+  background: variant === "dark" ? theme.dark : theme.light,
+  color: variant === "dark" ? theme.light : undefined,
   padding: 16,
-  borderRadius: 4,
+  borderRadius: 8,
   minHeight: 72,
-  maxHeight: 125,
 }));

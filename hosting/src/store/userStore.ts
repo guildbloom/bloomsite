@@ -10,10 +10,9 @@ export const useUserStore = create<Store>(() => ({
 }));
 
 export async function checkAuthStatus(redirect = true) {
-  const prevStatus = useUserStore.getState()?.isAuthenticated;
   const nextStatus = await isAuthenticated().catch(() => false);
   useUserStore.setState({ isAuthenticated: nextStatus });
-  if (redirect && prevStatus && !nextStatus) {
+  if (redirect && !nextStatus) {
     location.href = "/";
   }
 }

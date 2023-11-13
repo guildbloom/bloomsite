@@ -8,14 +8,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RouterOutlet />,
-    loader: async () => {
-      await checkAuthStatus(false);
-      return null;
-    },
     children: [
       {
         index: true,
-        lazy: () => import("../views/home/Home"),
+        lazy: () => import("../views/Home/Home"),
+      },
+      {
+        path: "help",
+        lazy: () => import("../views/Help/Help"),
       },
     ],
   },
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("../views/discover/Discover"),
+        lazy: () => import("../views/Discover/Discover"),
       },
       {
-        path: "fake",
-        lazy: () => import("../views/home/Home"),
+        path: "profile",
+        lazy: () => import("../views/Profile/Profile"),
       },
     ],
   },

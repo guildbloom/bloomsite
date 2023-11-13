@@ -14,10 +14,29 @@ export async function trackGuilds(guilds = []) {
   for (const { id, name, icon, features } of guilds) {
     const idRef = guildStore().doc(id);
 
-    if (!(await idRef.get()).data()) {
-      await idRef.create({ id, name, icon, features });
-    } else {
-      await idRef.create({ id, name, icon, features });
-    }
+    const dataToUpdateOrCreate = {
+      id,
+      name,
+      icon,
+      features,
+    };
+
+    await idRef
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          // Document exists, update it
+          return idRef.update(dataToUpdateOrCreate);
+        } else {
+          // Document doesn't exist, create it
+          return idRef.set(dataToUpdateOrCreate);
+        }
+      })
+      .then(() => {
+        console.log("Record updated or created successfully.");
+      })
+      .catch((error) => {
+        console.error("Error updating or creating record:", error);
+      });
   }
 }

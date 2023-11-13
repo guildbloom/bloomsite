@@ -1,20 +1,11 @@
-import { PropsWithChildren, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiscord } from "@fortawesome/free-brands-svg-icons";
-
-import { useWindowSize } from "@src/common/hooks/useWindowSize";
-import { Navbar, Button, primary } from "@src/theme";
-import { loginWithDiscord } from "@src/firebase";
+import { PropsWithChildren } from "react";
+import { Outlet } from "react-router-dom";
+import { Box } from "react-elevated-emotion";
 
 import background from "@src/assets/images/PublicBackground.jpg";
-import favicon from "@src/assets/images/favicon.png";
-import { Box, Flex } from "react-elevated-emotion";
-import { useUserStore } from "@src/store/userStore";
-import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import Navigation from "./Navigation";
 
 export default function RouterOutlet({ children }: PropsWithChildren) {
-  const { isAuthenticated } = useUserStore();
   return (
     <>
       <div
@@ -31,35 +22,8 @@ export default function RouterOutlet({ children }: PropsWithChildren) {
         }}
       />
 
-      <Navbar
-        logo={favicon}
-        title="GuildBloom"
-        links={[
-          {
-            to: "/",
-            name: "Home",
-          },
-          {
-            to: "/help",
-            name: "Help",
-            icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-            float: true,
-          },
-        ]}
-        actions={[
-          isAuthenticated
-            ? (navigate) => (
-                <Button onClick={() => navigate("/app")}>Profile</Button>
-              )
-            : () => (
-                <Button onClick={loginWithDiscord}>
-                  <FontAwesomeIcon icon={faDiscord} />
-                  Login with Discord
-                </Button>
-              ),
-        ]}
-      />
-      <Box sx={{ position: "relative", zIndex: 1, mt: 30 }}>
+      <Navigation />
+      <Box sx={{ position: "relative", zIndex: 1, mt: 30, pt: 2 }}>
         <Outlet />
         {children}
       </Box>

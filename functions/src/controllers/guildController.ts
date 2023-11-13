@@ -1,6 +1,4 @@
 import { Router } from "express";
-import { listGuilds } from "../store/guilds";
-import { store } from "../app";
 import { paginateCollection } from "../middleware/paginateCollection";
 
 const router = Router();

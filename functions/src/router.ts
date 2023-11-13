@@ -1,13 +1,15 @@
 import { Router } from "express";
 import { authenticatedRequest } from "./middleware/authenticatedRequest";
-import authRoute from "./controllers/authController";
-import userRoute from "./controllers/userController";
-import guildRoute from "./controllers/guildController";
+import authController from "./controllers/authController";
+import userController from "./controllers/userController";
+import guildController from "./controllers/guildController";
+import fundingController from "./controllers/fundingController";
 
 const router = Router();
 
-router.use(authRoute);
-router.use(authenticatedRequest(), userRoute);
-router.use(authenticatedRequest(), guildRoute);
+router.use(authController);
+router.use(authenticatedRequest(), userController);
+router.use(authenticatedRequest(), guildController);
+router.use(authenticatedRequest(), fundingController);
 
 export default router;
