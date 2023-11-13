@@ -3,6 +3,8 @@ import { checkAuthStatus } from "../store/userStore";
 import RouterOutlet from "./Outlet";
 
 import NoMatch from "./NoMatch";
+import { Loader } from "@src/theme";
+import Splash from "./Splash";
 
 const router = createBrowserRouter([
   {
@@ -49,5 +51,14 @@ const router = createBrowserRouter([
 ]);
 
 export default function Router() {
-  return <RouterProvider router={router} fallbackElement={<RouterOutlet />} />;
+  return (
+    <RouterProvider
+      router={router}
+      fallbackElement={
+        <RouterOutlet>
+          <Splash />
+        </RouterOutlet>
+      }
+    />
+  );
 }

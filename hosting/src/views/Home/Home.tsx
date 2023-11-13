@@ -10,6 +10,8 @@ import {
   CardFigure,
   CardText,
   CardTitle,
+  Loader,
+  LoaderSplashContainer,
   MobileWrapper,
 } from "@src/theme";
 import { Flex, minmax } from "react-elevated-emotion";

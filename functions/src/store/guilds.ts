@@ -32,9 +32,7 @@ export async function trackGuilds(guilds = []) {
           return idRef.set(dataToUpdateOrCreate);
         }
       })
-      .then(() => {
-        console.log("Record updated or created successfully.");
-      })
+      .then(() => true)
       .catch((error) => {
         console.error("Error updating or creating record:", error);
       });

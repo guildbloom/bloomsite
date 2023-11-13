@@ -1,80 +1,105 @@
-import tags from "react-elevated-emotion";
+import tags, { Flex, FlexProps } from "react-elevated-emotion";
 import { keyframes } from "@emotion/react";
 
-/*
+import right from "@src/assets/images/gb_mask_right.svg";
+import left from "@src/assets/images/gb_mask_left.svg";
 
-.loader {
-    position: relative,
-    width: 164px,
-    height: 164px,
+const splitRight = keyframes`
+  0%, 100% {
+    transform: translateX(0%, 0%);
   }
-  .loader::before , .loader::after {
-    content: '',
-    position: absolute,
-    width: 40px,
-    height: 40px,
-    background-color: #fff,
-    left: 50%,
-    top: 50%,
-    animation: rotate 1s ease-in infinite,
-}
-.loader::after {
-  width: 20px,
-  height: 20px,
-  background-color: #FF3D00,
-  animation: rotate 1s ease-in infinite, moveY 1s ease-in infinite ,
-}
-
-@keyframes moveY {
-  0% , 100% {top: 10%}
-  45% , 55% {top: 59%}
-  60% {top: 40%}
-}
-@keyframes rotate {
-  0% { transform: translate(-50%, -100%) rotate(0deg) scale(1 , 1)}
-  25%{ transform: translate(-50%, 0%) rotate(180deg) scale(1 , 1)}
-  45% , 55%{ transform: translate(-50%, 100%) rotate(180deg) scale(3 , 0.5)}
-  60%{ transform: translate(-50%, 100%) rotate(180deg) scale(1, 1)}
-  75%{ transform: translate(-50%, 0%) rotate(270deg) scale(1 , 1)}
-  100%{ transform: translate(-50%, -100%) rotate(360deg) scale(1 , 1)}
-}
-    
-*/
-
-const moveY = keyframes`
-    0% , 100% {top: 10%}
-    45% , 55% {top: 59%}
-    60% {top: 40%}
+  50% {
+    transform: translate(30%, -30%);
+  }
+`;
+const splitLeft = keyframes`
+  0%, 100% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translate(-30%, 30%);
+  }
+`;
+const opacity = keyframes`
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.1;
+  }
 `;
 
-const rotate = keyframes`
-    0% { transform: translate(-50%, -100%) rotate(0deg) scale(1 , 1)}
-    25%{ transform: translate(-50%, 0%) rotate(180deg) scale(1 , 1)}
-    45% , 55%{ transform: translate(-50%, 100%) rotate(180deg) scale(3 , 0.5)}
-    60%{ transform: translate(-50%, 100%) rotate(180deg) scale(1, 1)}
-    75%{ transform: translate(-50%, 0%) rotate(270deg) scale(1 , 1)}
-    100%{ transform: translate(-50%, -100%) rotate(360deg) scale(1 , 1)}
-`;
-
-export const Loader = tags.span({})(() => ({
-  position: "relative",
-  width: 164,
-  height: 164,
-
-  ":before,:after": {
-    content: "''",
-    position: "absolute",
-    width: 40,
-    height: 40,
-    backgroundColor: "#fff",
-    left: "50%",
-    top: "50%",
-    animation: `${rotate} 1s ease-in infinite`,
+export const Loader = tags.div({
+  defaultProps(props) {
+    return {
+      children: (
+        <>
+          <div className="mask-left"></div>
+          <div className="mask-right"></div>
+        </>
+      ),
+    };
   },
-  ":after": {
-    width: 20,
-    height: 20,
-    backgroundColor: "#FF3D00",
-    animation: `${rotate} 1s ease-in infinite, ${moveY} 1s ease-in infinite`,
+})(() => ({
+  width: 102,
+  height: 100,
+  display: "inline-flex",
+  alignItems: "center",
+  transition: "all 2.1s",
+  animation: `${opacity} 2.1s infinite`,
+
+  ".mask-left, .mask-right": {
+    position: "relative",
+    transition: "all 2.1s",
+    ":before": {
+      content: "''",
+      position: "absolute",
+      maskSize: "contain",
+      maskRepeat: "no-repeat",
+      width: "100%",
+      height: "100%",
+
+      animationDuration: "2.1s",
+      animationIterationCount: "infinite",
+
+      imageRendering: "crisp-edges",
+      transition: "all 2.1s",
+    },
+  },
+
+  ".mask-left": {
+    width: 50,
+    height: 100,
+
+    ":before": {
+      background: "linear-gradient(112deg, #4872B0 7.88%, #001F4E 115.22%)",
+      maskImage: `url(${left})`,
+      animationName: `${splitLeft}`,
+    },
+  },
+  ".mask-right": {
+    width: 53,
+    height: 92,
+    ":before": {
+      background: "linear-gradient(85deg, #4872B0 -47.57%, #001F4E 111.87%)",
+      maskImage: `url(${right})`,
+      animationName: `${splitRight}`,
+    },
   },
 }));
+
+export const LoaderSplashContainer = tags.fragment<FlexProps>({
+  defaultProps(props) {
+    return {
+      children: (
+        <Flex
+          fill
+          minH={300}
+          align="center"
+          justify="center"
+          {...(props as any)}
+        />
+      ),
+    };
+  },
+})({});
