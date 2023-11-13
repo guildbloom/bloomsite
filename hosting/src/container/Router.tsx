@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("../views/Discover2/Discover"),
+        lazy: () => import("../views/Discover/Discover"),
       },
       {
         path: "profile",
