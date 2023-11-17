@@ -31,7 +31,7 @@ export function Component() {
           </p>
         </MobileWrapper>
       </Flex>
-      <Flex maxW={730} wrap="wrap" m="auto" justify="center" gap={24} mt={24}>
+      <Flex maxW={730} wrap="wrap" m="auto" justify="center" gap={24} mt={34}>
         <Card sx={minmax.width(352)}>
           <CardFigure outline>
             <FontAwesomeIcon icon={faCrown} size="xl" />

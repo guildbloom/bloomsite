@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import cookies from "cookie-parser";
 import logger from "firebase-functions/logger";
 import { onRequest } from "firebase-functions/v2/https";
 
@@ -23,6 +24,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookies());
 
 router.get("/ping", (r, res) => {
   res.send("Pong");

@@ -65,6 +65,7 @@ export const Card = tags.div({
   label: "card",
   background: variant === "dark" ? theme.dark : theme.light,
   color: variant === "dark" ? theme.light : undefined,
+  boxShadow: "var(--boxShadow)",
   padding: 16,
   borderRadius: 8,
   minHeight: 72,

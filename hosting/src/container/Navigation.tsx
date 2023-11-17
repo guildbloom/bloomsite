@@ -4,14 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import favicon from "@src/assets/images/favicon.png";
 import { loginWithDiscord } from "@src/firebase";
 import { Navbar, Button } from "@src/theme";
-import { useEffect } from "react";
-import { checkAuthStatus, useUserStore } from "@src/store/userStore";
+import { useUserStore } from "@src/store/userStore";
+import { featureFlags } from "@src/common/utils/featureflag";
+import { useNavigate } from "react-router-dom";
 
 export default function Navigation() {
   const { isAuthenticated } = useUserStore();
-  // useEffect(() => {
-  //   checkAuthStatus(false);
-  // }, []);
+
+  const navigate = useNavigate();
+
+  const toWaitlist = () => navigate("/waitlist");
+
   return (
     <Navbar
       logo={favicon}
@@ -20,6 +23,7 @@ export default function Navigation() {
         {
           to: "/",
           name: "Home",
+          hide: featureFlags.main,
         },
         {
           to: "/app",
@@ -38,12 +42,18 @@ export default function Navigation() {
           ? (navigate) => (
               <Button onClick={() => navigate("/app/profile")}>Profile</Button>
             )
-          : () => (
-              <Button onClick={loginWithDiscord}>
-                <FontAwesomeIcon icon={faDiscord} />
-                Login with Discord
-              </Button>
-            ),
+          : () =>
+              !featureFlags.main ? (
+                <Button onClick={loginWithDiscord}>
+                  <FontAwesomeIcon icon={faDiscord} />
+                  Login with Discord
+                </Button>
+              ) : (
+                <Button onClick={toWaitlist}>
+                  <FontAwesomeIcon icon={faDiscord} />
+                  Join the waitlist
+                </Button>
+              ),
       ]}
     />
   );

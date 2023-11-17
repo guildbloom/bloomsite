@@ -28,6 +28,7 @@ router.get("/auth/discord/callback", (req, res, next) => {
 });
 
 router.get("/auth/logout", (req, res) => {
+  res.clearCookie("_session");
   req.logOut({}, () => {
     res.redirect("/");
   });

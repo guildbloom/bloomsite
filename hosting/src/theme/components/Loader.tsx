@@ -40,7 +40,7 @@ export const Loader = tags.div({
       ),
     };
   },
-})(() => ({
+})(({ variant }) => ({
   width: 102,
   height: 100,
   display: "inline-flex",
@@ -72,7 +72,10 @@ export const Loader = tags.div({
     height: 100,
 
     ":before": {
-      background: "linear-gradient(112deg, #4872B0 7.88%, #001F4E 115.22%)",
+      background:
+        variant === "light"
+          ? "white"
+          : "linear-gradient(112deg, #4872B0 7.88%, #001F4E 115.22%)",
       maskImage: `url(${left})`,
       animationName: `${splitLeft}`,
     },
@@ -81,7 +84,10 @@ export const Loader = tags.div({
     width: 53,
     height: 92,
     ":before": {
-      background: "linear-gradient(85deg, #4872B0 -47.57%, #001F4E 111.87%)",
+      background:
+        variant === "light"
+          ? "white"
+          : "linear-gradient(85deg, #4872B0 -47.57%, #001F4E 111.87%)",
       maskImage: `url(${right})`,
       animationName: `${splitRight}`,
     },

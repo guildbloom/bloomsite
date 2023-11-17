@@ -4,10 +4,12 @@ import styled, {
   SuperThemePalette,
   Variant,
 } from "react-elevated-emotion";
+import { Loader } from "./Loader";
 
 export type ButtonProps = {
   outline?: boolean;
   active?: boolean;
+  loading?: boolean;
 };
 
 type ConfigColor = {
@@ -36,7 +38,21 @@ export function configureColor({
 export const Button = styled.button<ButtonProps>({
   testid: "button",
   ignore: ["outline", "active"],
-})(({ theme, active = false, outline = false }) => ({
+  defaultProps({ disabled, loading, children }) {
+    return {
+      disabled: loading ?? disabled,
+      children: loading ? (
+        <Loader
+          size="sm"
+          variant="light"
+          sx={{ scale: "20%", ml: -40, mr: -30 }}
+        />
+      ) : (
+        children
+      ),
+    };
+  },
+})(({ theme, disabled, loading, active = false, outline = false }) => ({
   label: "button",
   display: "inline-flex",
   justifyContent: "center",
@@ -52,25 +68,36 @@ export const Button = styled.button<ButtonProps>({
 
   ...(active
     ? {
-        borderColor: outline ? theme.primary : undefined,
+        borderColor: outline ? theme.primary : "transparent",
         color: !outline ? theme.primary : theme.primaryAlt,
         background: outline ? theme.primary : "transparent",
 
         ":hover": {
-          borderColor: outline ? theme.primaryHover : undefined,
+          borderColor: outline ? theme.primaryHover : "transparent",
           color: outline ? theme.primaryAlt : theme.primary,
           background: !outline ? theme.primaryHover : theme.primaryHover,
         },
       }
     : {
-        borderColor: outline ? theme.primary : undefined,
+        borderColor: outline ? theme.primary : "transparent",
         color: outline ? theme.primary : theme.primaryAlt,
         background: !outline ? theme.primary : "transparent",
 
         ":hover": {
-          borderColor: outline ? theme.primaryHover : undefined,
+          borderColor: outline ? theme.primaryHover : "transparent",
           color: theme.primaryAlt,
           background: !outline ? theme.primaryHover : theme.primaryHover,
         },
       }),
+
+  ...(loading || disabled
+    ? {
+        opacity: 0.7,
+        ":hover": {
+          borderColor: outline ? theme.primary : "transparent",
+          color: outline ? theme.primary : theme.primaryAlt,
+          background: !outline ? theme.primary : "transparent",
+        },
+      }
+    : {}),
 }));

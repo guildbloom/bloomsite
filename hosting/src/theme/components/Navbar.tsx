@@ -51,7 +51,6 @@ export const Navbar = tags.div<NavbarProps>({
               ? to === "/"
               : to !== "/" && location.pathname.startsWith(to.toString())
           }
-          sx={{ borderColor: "transparent" }}
           onClick={() => onClick(to)}
         >
           {icon && <span>{icon}</span>}
@@ -182,6 +181,13 @@ export const Navbar = tags.div<NavbarProps>({
 
     ".actions-mobile": {
       display: "none",
+    },
+
+    "[class$=-button]": {
+      borderColor: "transparent",
+      ":hover": {
+        borderColor: "transparent",
+      },
     },
 
     [mediaQuery.at(-1)]: {

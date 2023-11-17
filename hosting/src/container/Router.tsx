@@ -3,7 +3,6 @@ import { checkAuthStatus } from "../store/userStore";
 import RouterOutlet from "./Outlet";
 
 import NoMatch from "./NoMatch";
-import { Loader } from "@src/theme";
 import Splash from "./Splash";
 
 const router = createBrowserRouter([
@@ -18,6 +17,18 @@ const router = createBrowserRouter([
       {
         path: "help",
         lazy: () => import("../views/Help/Help"),
+      },
+      {
+        path: "terms",
+        lazy: () => import("../views/Terms/Terms"),
+      },
+      {
+        path: "privacy",
+        lazy: () => import("../views/Privacy/Privacy"),
+      },
+      {
+        path: "waitlist",
+        lazy: () => import("../views/Waitlist/Waitlist"),
       },
     ],
   },

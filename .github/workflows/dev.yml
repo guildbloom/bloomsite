@@ -1,8 +1,8 @@
-name: Build and Deploy
+name: Build and Deploy (dev)
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         run: npm run build
 
   deploy:
-    name: Deploy
+    name: Deploy Functions
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,22 @@ jobs:
         with:
           args: deploy --only functions,hosting
         env:
-          # FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GUILDBLOOM_63C0C }}
+
+  deploy:
+    name: Deploy Hosting
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: npm ci
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: hosting:channel:deploy beta
+        env:
           GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GUILDBLOOM_63C0C }}
           VITE_FIREBASE_APIKEY: ${{ secrets.VITE_FIREBASE_APIKEY}}
           VITE_FIREBASE_APPID: ${{ secrets.VITE_FIREBASE_APPID}}
