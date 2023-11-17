@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: npm run build
 
-  deploy:
+  deployF:
     name: Deploy Functions
     needs: build
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
         env:
           GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GUILDBLOOM_63C0C }}
 
-  deploy:
+  deployH:
     name: Deploy Hosting
     needs: build
     runs-on: ubuntu-latest
