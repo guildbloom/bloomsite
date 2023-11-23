@@ -8,6 +8,10 @@
         "function": "api"
       },
       {
+        "source": "/bot/**",
+        "function": "bot"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

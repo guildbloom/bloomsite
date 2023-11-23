@@ -1,6 +1,9 @@
 import express from "express";
 import session from "express-session";
 import cookies from "cookie-parser";
+import morgan from "morgan";
+import cors from "cors";
+
 import logger from "firebase-functions/logger";
 import { onRequest } from "firebase-functions/v2/https";
 
@@ -13,6 +16,9 @@ import { listUsers } from "./store/user";
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+app.use(morgan("short"));
+
 app.use(
   session({
     name: "__session",
@@ -21,7 +27,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookies());

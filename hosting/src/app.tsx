@@ -6,8 +6,11 @@ import "./theme/stylesheets/index.css";
 
 import Router from "./container/Router";
 import { SuperThemeProvider } from "react-elevated-emotion";
+import { botPing } from "./api/bot";
 
 const root = createRoot(document.getElementById("root"));
+
+botPing().then(console.log);
 
 root.render(
   <MetaMaskUIProvider
