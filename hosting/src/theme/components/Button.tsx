@@ -38,13 +38,13 @@ export function configureColor({
 export const Button = styled.button<ButtonProps>({
   testid: "button",
   ignore: ["outline", "active"],
-  defaultProps({ disabled, loading, children }) {
+  defaultProps({ disabled, loading, variant, children }: any) {
     return {
       disabled: loading ?? disabled,
       children: loading ? (
         <Loader
           size="sm"
-          variant="light"
+          variant={variant !== "dark" ? "dark" : "light"}
           sx={{ scale: "20%", ml: -40, mr: -30 }}
         />
       ) : (
@@ -52,52 +52,65 @@ export const Button = styled.button<ButtonProps>({
       ),
     };
   },
-})(({ theme, disabled, loading, active = false, outline = false }) => ({
-  label: "button",
-  display: "inline-flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: 4,
-  border: `2px solid transparent`,
-  borderRadius: 8,
-  fontWeight: 700,
-  padding: "5px 7px",
-  cursor: "pointer",
+})(
+  ({
+    theme,
+    variant = "primary",
+    disabled,
+    loading,
+    active = false,
+    outline = false,
+  }) => ({
+    label: active ? "button-active" : "button",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
+    border: `2px solid transparent`,
+    borderRadius: 8,
+    fontWeight: 700,
+    padding: "5px 7px",
+    cursor: "pointer",
 
-  transition: "all 0.4s",
+    transition: "all 0.4s",
 
-  ...(active
-    ? {
-        borderColor: outline ? theme.primary : "transparent",
-        color: !outline ? theme.primary : theme.primaryAlt,
-        background: outline ? theme.primary : "transparent",
+    ...(active
+      ? {
+          borderColor: outline ? theme[`${variant}`] : "transparent",
+          color: !outline ? theme[`${variant}`] : theme[`${variant}Invert`],
+          background: outline ? theme[`${variant}`] : "transparent",
 
-        ":hover": {
-          borderColor: outline ? theme.primaryHover : "transparent",
-          color: outline ? theme.primaryAlt : theme.primary,
-          background: !outline ? theme.primaryHover : theme.primaryHover,
-        },
-      }
-    : {
-        borderColor: outline ? theme.primary : "transparent",
-        color: outline ? theme.primary : theme.primaryAlt,
-        background: !outline ? theme.primary : "transparent",
+          ":hover": {
+            borderColor: outline ? theme[`${variant}Hover`] : "transparent",
+            color: outline ? theme[`${variant}Invert`] : theme[`${variant}`],
+            background: !outline
+              ? theme[`${variant}Hover`]
+              : theme[`${variant}Hover`],
+          },
+        }
+      : {
+          borderColor: outline ? theme[`${variant}`] : "transparent",
+          color: outline ? theme[`${variant}`] : theme[`${variant}Invert`],
+          background: !outline ? theme[`${variant}`] : "transparent",
 
-        ":hover": {
-          borderColor: outline ? theme.primaryHover : "transparent",
-          color: theme.primaryAlt,
-          background: !outline ? theme.primaryHover : theme.primaryHover,
-        },
-      }),
+          ":hover": {
+            borderColor: outline ? theme[`${variant}Hover`] : "transparent",
+            color: theme[`${variant}Invert`],
+            background: !outline
+              ? theme[`${variant}Hover`]
+              : theme[`${variant}Hover`],
+          },
+        }),
 
-  ...(loading || disabled
-    ? {
-        opacity: 0.7,
-        ":hover": {
-          borderColor: outline ? theme.primary : "transparent",
-          color: outline ? theme.primary : theme.primaryAlt,
-          background: !outline ? theme.primary : "transparent",
-        },
-      }
-    : {}),
-}));
+    ...(loading || disabled
+      ? {
+          opacity: 0.7,
+          ":hover": {
+            borderColor: outline ? theme[`${variant}`] : "transparent",
+            color: outline ? theme[`${variant}`] : theme[`${variant}Invert`],
+            background: !outline ? theme[`${variant}`] : "transparent",
+          },
+        }
+      : {}),
+  })
+);

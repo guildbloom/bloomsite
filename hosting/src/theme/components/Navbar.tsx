@@ -1,4 +1,4 @@
-import tags, { Flex } from "react-elevated-emotion";
+import tags, { Box, Flex } from "react-elevated-emotion";
 import {
   useNavigate,
   NavigateFunction,
@@ -9,7 +9,7 @@ import {
 import { mediaQuery } from "../helpers/breakpoints";
 
 import { css } from "@emotion/react";
-import { primary } from "../variables";
+import { themeDarkAlt, themeLight } from "../variables";
 import { Fragment, ReactNode, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -46,6 +46,7 @@ export const Navbar = tags.div<NavbarProps>({
       element: (
         <Button
           outline
+          variant="light"
           active={
             location.pathname === "/"
               ? to === "/"
@@ -69,78 +70,89 @@ export const Navbar = tags.div<NavbarProps>({
     return {
       children: (
         <>
-          <Flex align="center" gap={16}>
-            {props.logo || props.title ? (
-              <Flex align="center" gap={8} onClick={() => navigate("/")}>
-                {props.logo ? <img src={props.logo} height={32} /> : null}
-                {props.title ? (
-                  <h5 style={{ color: primary }}>{props.title}</h5>
-                ) : null}
-              </Flex>
-            ) : null}
+          <Flex align="center" justify="space-between" w="100%">
+            <Flex align="center" gap={16}>
+              {props.logo || props.title ? (
+                <Flex align="center" onClick={() => navigate("/")}>
+                  {props.logo ? (
+                    <img id="logo" src={props.logo} height={78} />
+                  ) : null}
+                  {props.title ? <h3>{props.title}</h3> : null}
+                </Flex>
+              ) : null}
 
-            {basicLinks.length ? (
-              <Flex className="actions-desktop" align="center" gap={8}>
+              {/* {basicLinks.length ? (
+              <Flex className="links-desktop" align="center" gap={8}>
                 {basicLinks.map((el, key) => (
                   <Fragment key={key}>{el}</Fragment>
                 ))}
               </Flex>
-            ) : null}
-          </Flex>
+            ) : null} */}
+            </Flex>
 
-          {props.children}
+            {props.children}
 
-          <Flex align="center" gap={16}>
-            {floatingLinks.length ? (
-              <Flex className="actions-desktop" align="center" gap={8}>
-                {floatingLinks.map((el, key) => (
-                  <Fragment key={key}>{el}</Fragment>
-                ))}
-              </Flex>
-            ) : null}
-
-            {props.actions?.length ? (
-              <>
-                <Flex className="actions-desktop" align="center">
-                  {props.actions.map((act, key) => (
-                    <Fragment key={key}>{act(onClick)}</Fragment>
+            <Flex align="center" gap={8}>
+              {floatingLinks.length ? (
+                <Flex className="links-desktop" align="center" gap={8}>
+                  {floatingLinks.map((el, key) => (
+                    <Fragment key={key}>{el}</Fragment>
                   ))}
                 </Flex>
+              ) : null}
 
-                <Flex className="actions-mobile" align="center">
-                  <Button
-                    outline
-                    active={open}
-                    onClick={() => setOpen((x) => !x)}
-                  >
-                    <FontAwesomeIcon icon={faBars} />
-                  </Button>
-                </Flex>
-              </>
-            ) : null}
+              {props.actions?.length ? (
+                <>
+                  <Flex className="actions-desktop" align="center">
+                    {props.actions.map((act, key) => (
+                      <Fragment key={key}>{act(onClick)}</Fragment>
+                    ))}
+                  </Flex>
+                </>
+              ) : null}
+            </Flex>
+
+            <Flex className="actions-mobile" align="center">
+              {!open ? (
+                <Button
+                  id="menu"
+                  outline
+                  variant="light"
+                  active={open}
+                  onClick={() => setOpen((x) => !x)}
+                  sx={{ color: themeLight, background: "transparent" }}
+                >
+                  <FontAwesomeIcon size="2x" icon={faBars} />
+                </Button>
+              ) : (
+                <Button
+                  id="close"
+                  outline
+                  onClick={() => setOpen((x) => !x)}
+                  variant="dark"
+                  sx={{
+                    color: themeDarkAlt,
+                    background: "transparent",
+                    zIndex: 9999,
+                  }}
+                >
+                  <FontAwesomeIcon icon={faXmark} size="2x" />
+                </Button>
+              )}
+            </Flex>
           </Flex>
 
           {open ? (
-            <Flex column className="mobile-menu" gap={32}>
-              <Flex column align="end" className="actions-mobile">
-                <Button outline onClick={() => setOpen((x) => !x)}>
-                  <FontAwesomeIcon icon={faXmark} size="2x" />
-                </Button>
+            <Box sx={{ w: "100%", my: 28 }}>
+              <Flex column align="center" gap={8}>
+                {props.actions.map((act, key) => (
+                  <Fragment key={key}>{act(onClick)}</Fragment>
+                ))}
               </Flex>
-              {props.logo ? (
-                <Flex column align="center">
-                  <img src={props.logo} height={100} width={100} />
-                </Flex>
-              ) : null}
-              {props.actions?.length ? (
-                <Flex column align="center">
-                  {props.actions.map((act, key) => (
-                    <Fragment key={key}>{act(onClick)}</Fragment>
-                  ))}
-                </Flex>
-              ) : null}
-            </Flex>
-          ) : null}
+            </Box>
+          ) : (
+            false
+          )}
         </>
       ),
     };
@@ -149,31 +161,30 @@ export const Navbar = tags.div<NavbarProps>({
   return css({
     label: "navbar",
     display: "flex",
-    position: "sticky",
-    top: 10,
-    left: -10,
-    right: 10,
-    background: theme.light,
-    padding: 8,
-    margin: "8px 0",
+    flexDirection: "column",
+    position: "relative",
+    padding: "12px 15px",
     borderRadius: 8,
     justifyContent: "space-between",
     zIndex: 9999,
-    boxShadow: "var(--boxShadow)",
+    transition: "height 3s ease",
 
-    h5: {
-      color: primary,
+    h3: {
       margin: 0,
+      color: themeLight,
+      letterSpacing: 10,
+      textTransform: "uppercase",
+      marginLeft: 52,
     },
 
     ".mobile-menu": {
       display: "none",
       overflow: "hidden",
       zIndex: 999,
-      width: "100vw",
-      height: "100vh",
+      width: "100%",
+      height: "100%",
       background: theme.light,
-      padding: "8px 17px",
+      padding: "18px 17px",
       position: "fixed",
       top: 0,
       left: 0,
@@ -183,21 +194,28 @@ export const Navbar = tags.div<NavbarProps>({
       display: "none",
     },
 
-    "[class$=-button]": {
+    ".links-desktop button, button#menu, button#close": {
       borderColor: "transparent",
+      background: "transparent",
       ":hover": {
         borderColor: "transparent",
       },
     },
 
-    [mediaQuery.at(-1)]: {
-      top: 0,
-      margin: 0,
+    [mediaQuery.at(-2)]: {
       borderRadius: 0,
+      h3: {
+        letterSpacing: 5,
+        marginLeft: 15,
+        fontSize: 20,
+      },
+      "img#logo": {
+        height: 50,
+      },
       ".mobile-menu": {
         display: "flex",
       },
-      ".actions-desktop": {
+      ".actions-desktop, .links-desktop": {
         display: "none",
       },
       ".actions-mobile": {

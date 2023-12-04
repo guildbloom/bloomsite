@@ -61,10 +61,10 @@ export const Card = tags.div({
         }
       : { children: props.children };
   },
-})(({ theme, variant }) => ({
+})(({ theme, variant = "light" }) => ({
   label: "card",
-  background: variant === "dark" ? theme.dark : theme.light,
-  color: variant === "dark" ? theme.light : undefined,
+  background: theme[`${variant}`],
+  color: theme[`${variant}Invert`],
   boxShadow: "var(--boxShadow)",
   padding: 16,
   borderRadius: 8,

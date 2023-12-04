@@ -12,23 +12,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("../views/Home/Home"),
+        lazy: () => import("../screens/Home/Home"),
       },
       {
         path: "help",
-        lazy: () => import("../views/Help/Help"),
+        lazy: () => import("../screens/Help/Help"),
       },
       {
         path: "terms",
-        lazy: () => import("../views/Terms/Terms"),
+        lazy: () => import("../screens/Terms/Terms"),
       },
       {
         path: "privacy",
-        lazy: () => import("../views/Privacy/Privacy"),
+        lazy: () => import("../screens/Privacy/Privacy"),
       },
       {
         path: "waitlist",
-        lazy: () => import("../views/Waitlist/Waitlist"),
+        lazy: () => import("../screens/Waitlist/Waitlist"),
       },
     ],
   },
@@ -43,11 +43,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("../views/Discover/Discover"),
+        lazy: () => import("../screens/Discover/Discover"),
       },
       {
-        path: "profile",
-        lazy: () => import("../views/Profile/Profile"),
+        path: "your-profile",
+        lazy: () => import("../screens/Profile/Profile"),
       },
     ],
   },

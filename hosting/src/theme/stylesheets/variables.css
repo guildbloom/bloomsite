@@ -1,10 +1,19 @@
 :root {
     --primary: #4872B0;
-    --primaryAlt: #EFF2F3;
     --primaryHover: #264778;
+    
     --themeLight: #EFF2F3;
 
-    --themeDark: #2e343f;
+    --themeDark: #151616;
+    --themeDarkAlt: #2e343f;
+    
+    --discordBlurple: #5865F2;
+    --metamaskOrange: #E69C0C;
+    
+    /* --primaryAlt: #EFF2F3;
+    --primary: #151616;
+    --secondary: #EFF2F3;
+    --themeLight: #EFF2F3; */
 
     --boxShadow: 0px 5px 10px rgba(0,0,0,0.2);
 }

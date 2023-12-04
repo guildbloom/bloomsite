@@ -8,9 +8,9 @@ export function Component() {
   const inviteLink = "https://discord.gg/k4vY3N8dsD";
   return (
     <Flex column>
-      <Card variant="dark">
-        <Flex justify="space-between">
-          <Flex gap={24}>
+      <Card variant="dark" mb={28}>
+        <Flex justify="space-between" wrap="wrap" gap={8}>
+          <Flex gap={20} fill>
             <img
               src={discord_profile}
               height={50}
@@ -24,13 +24,15 @@ export function Component() {
               </p>
             </Flex>
           </Flex>
-          <Flex column fill justify="center" maxW={120}>
+          <Flex justify="center">
             <Button onClick={() => window.open(inviteLink)}>
               Join the Server
             </Button>
           </Flex>
         </Flex>
       </Card>
+      <h3>FAQs</h3>
+      <Flex gap={8}></Flex>
     </Flex>
   );
 }
