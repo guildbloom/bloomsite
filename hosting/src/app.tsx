@@ -29,6 +29,7 @@ const Wrapper = (props: PropsWithChildren) =>
     />
   );
 
+// App
 export const App = () => (
   <Wrapper>
     <SuperThemeProvider>

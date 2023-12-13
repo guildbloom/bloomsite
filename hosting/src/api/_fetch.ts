@@ -17,7 +17,8 @@ function doFetch<T = any>(url, init?: RequestInit): Promise<T> {
   });
 }
 
-export const doGet = <T = any>(url) => doFetch<T>(url);
+export const doGet = <T = any>(url, init?: RequestInit) =>
+  doFetch<T>(url, init);
 
-export const doPost = <T = any>(url, body) =>
-  doFetch<T>(url, { method: "POST", body });
+export const doPost = <T = any>(url, body, init?: RequestInit) =>
+  doFetch<T>(url, { ...init, method: "POST", body });
