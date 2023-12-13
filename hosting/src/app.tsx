@@ -30,10 +30,12 @@ const Wrapper = (props: PropsWithChildren) =>
   );
 
 // App
-export const App = () => (
+const App = () => (
   <Wrapper>
     <SuperThemeProvider>
       <Router />
     </SuperThemeProvider>
   </Wrapper>
 );
+
+export default App;
