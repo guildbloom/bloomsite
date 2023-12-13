@@ -23,6 +23,7 @@ import { useUserStore } from "@src/store/userStore";
 import { featureFlags } from "@src/common/utils/featureflag";
 import { useNavigate } from "react-router-dom";
 import tags, { SuperComponent } from "react-elevated-emotion";
+import { useEffect } from "react";
 
 const MetaMaskIcon = tags.div({
   defaultProps(props) {
@@ -78,14 +79,16 @@ export const DiscordThemedButton: SuperComponent<"button", ButtonProps> = (
 export const MetaMaskThemedButton: SuperComponent<"button", ButtonProps> = (
   props
 ) => {
-  const { connect } = useConnect();
-  const { connected } = useSDK();
+  const { connect, isIdle, reset, isLoading, ...otherConnect } = useConnect();
+  const { connected, connecting, sdk, error } = useSDK();
 
-  if (!connected) {
+  console.log({ isIdle, isLoading, ...otherConnect, error });
+
+  if (!connected || isIdle || isLoading) {
     return (
       <ActionBaseButton
         {...props}
-        outline
+        onClick={() => connect()}
         sx={
           {
             color: metamaskOrange,
@@ -98,6 +101,7 @@ export const MetaMaskThemedButton: SuperComponent<"button", ButtonProps> = (
             ...props?.sx,
           } as any
         }
+        disabled={isLoading}
       >
         <MetaMaskIcon />
         Connect a wallet
@@ -107,26 +111,13 @@ export const MetaMaskThemedButton: SuperComponent<"button", ButtonProps> = (
 
   return (
     <MetaMaskButton
-      theme="dark"
+      theme="light"
       color="white"
-      // iconStyle={{
-      //   fill: metamaskOrange,
-      // }}
-      // textStyle={{
-      //   display: "flex",
-      //   alignItems: "center",
-      //   lineHeight: "10px",
-      //   fontWeight: 700,
-      // }}
-      // buttonStyle={{
-      //   display: "flex",
-      //   border: "none",
-      //   alignItems: "center",
-      //   lineHeight: "10px",
-      //   cursor: "pointer",
-      //   padding: "12px 18px",
-      //   background: "transparent",
-      // }}
+      buttonStyle={{
+        border: "none",
+        padding: "12px 18px",
+        background: "transparent",
+      }}
     />
   );
 };

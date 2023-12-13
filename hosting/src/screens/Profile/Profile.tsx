@@ -4,6 +4,7 @@ import {
   useAccount,
   useBalance,
 } from "@metamask/sdk-react-ui";
+import { RouterHelmet } from "@src/container/Helmet";
 import { Card, CardFigure, CardText, CardTitle } from "@src/theme";
 import { useEffect } from "react";
 import { Flex } from "react-elevated-emotion";
@@ -24,6 +25,7 @@ export function Component() {
 
   return (
     <Flex column>
+      <RouterHelmet />
       <Card>
         <CardTitle>Connect your wallet</CardTitle>
         <CardText>

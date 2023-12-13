@@ -5,6 +5,7 @@ import {
   faBinoculars,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { RouterHelmet } from "@src/container/Helmet";
 import {
   Card,
   CardFigure,
@@ -20,6 +21,8 @@ Component.displayName = "Home";
 export function Component() {
   return (
     <>
+      <RouterHelmet />
+
       <Flex maxW={760} px={15} column m="auto" justify="start">
         <MobileWrapper mobile={{ textAlign: "center" }}>
           <h3>Welcome to Guild Bloom,</h3>

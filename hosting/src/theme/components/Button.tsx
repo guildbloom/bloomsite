@@ -37,7 +37,7 @@ export function configureColor({
 
 export const Button = styled.button<ButtonProps>({
   testid: "button",
-  ignore: ["outline", "active"],
+  ignore: ["outline", "active", "loading"],
   defaultProps({ disabled, loading, variant, children }: any) {
     return {
       disabled: loading ?? disabled,
@@ -45,7 +45,7 @@ export const Button = styled.button<ButtonProps>({
         <Loader
           size="sm"
           variant={variant !== "dark" ? "dark" : "light"}
-          sx={{ scale: "20%", ml: -40, mr: -30 }}
+          sx={{ scale: "20%" }}
         />
       ) : (
         children

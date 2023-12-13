@@ -12,7 +12,11 @@ import { css } from "@emotion/react";
 import { themeDarkAlt, themeLight } from "../variables";
 import { Fragment, ReactNode, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faCaretDown,
+  faCaretUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "./Button";
 
@@ -122,7 +126,7 @@ export const Navbar = tags.div<NavbarProps>({
                   onClick={() => setOpen((x) => !x)}
                   sx={{ color: themeLight, background: "transparent" }}
                 >
-                  <FontAwesomeIcon size="2x" icon={faBars} />
+                  <FontAwesomeIcon size="2x" icon={faCaretDown} />
                 </Button>
               ) : (
                 <Button
@@ -136,7 +140,7 @@ export const Navbar = tags.div<NavbarProps>({
                     zIndex: 9999,
                   }}
                 >
-                  <FontAwesomeIcon icon={faXmark} size="2x" />
+                  <FontAwesomeIcon icon={faCaretUp} size="2x" />
                 </Button>
               )}
             </Flex>

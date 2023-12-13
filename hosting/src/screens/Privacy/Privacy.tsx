@@ -1,10 +1,12 @@
 import { Card } from "@src/theme";
 import { TermsContainer } from "../Terms/Terms";
+import { RouterHelmet } from "@src/container/Helmet";
 
 Component.displayName = "Privacy";
 export function Component() {
   return (
     <TermsContainer>
+      <RouterHelmet title="Privacy Policy" />
       <Card>
         <h1>Privacy Policy</h1>
         <p>

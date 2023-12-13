@@ -1,3 +1,4 @@
+import { RouterHelmet } from "@src/container/Helmet";
 import { Card } from "@src/theme";
 
 import tags from "react-elevated-emotion";
@@ -25,6 +26,7 @@ Component.displayName = "Terms";
 export function Component() {
   return (
     <TermsContainer>
+      <RouterHelmet title="Terms" />
       <Card>
         <h1>Terms and Conditions</h1>
         <p>

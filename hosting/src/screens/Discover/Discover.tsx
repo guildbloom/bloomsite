@@ -1,4 +1,11 @@
+import { RouterHelmet } from "@src/container/Helmet";
+
 Component.displayName = "Discover";
 export function Component() {
-  return <div style={{}}></div>;
+  return (
+    <>
+      <RouterHelmet />
+      <div style={{}}></div>
+    </>
+  );
 }

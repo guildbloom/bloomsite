@@ -4,8 +4,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
+    "moduleResolution": "bundler",
     "paths": {
       "@src/*": ["src/*"]
     }
-  }
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

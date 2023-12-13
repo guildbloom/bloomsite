@@ -1,11 +1,15 @@
 {
   "name": "hosting",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "ssr:dev": "node server",
+    "ssr:build": "npm run ssr:build:client && npm run ssr:build:server",
+    "ssr:build:client": "vite build --ssrManifest --outDir ../dist/hosting/client",
+    "ssr:build:server": "vite build --ssr src/entry-ssr.tsx --outDir ../dist/hosting/server"
   },
-  "main": "lib/index.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
@@ -13,8 +17,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@lottiefiles/react-lottie-player": "^3.5.3",
-    "@metamask/sdk-react": "^0.12.0",
-    "@metamask/sdk-react-ui": "^0.12.0",
+    "@metamask/sdk-react-ui": "^0.14.1",
+    "compression": "^1.7.4",
     "firebase": "^10.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,12 +26,15 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.18.0",
     "react-slick": "^0.29.0",
+    "sirv": "^2.0.3",
     "slick-carousel": "^1.8.1",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
-    "@types/react-slick": "^0.23.12"
+    "@types/react-helmet": "^6.1.9",
+    "@types/react-slick": "^0.23.12",
+    "cross-env": "^7.0.3"
   }
 }

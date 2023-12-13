@@ -1,16 +1,13 @@
-import { createRoot } from "react-dom/client";
-import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
+import "./theme/stylesheets/index.css";
 import "./firebase";
 
-import "./theme/stylesheets/index.css";
+import { Fragment, PropsWithChildren } from "react";
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
+import { SuperThemeProvider } from "react-elevated-emotion";
 
 import Router from "./container/Router";
-import { SuperThemeProvider } from "react-elevated-emotion";
 import { botPing } from "./api/bot";
 import { featureFlags } from "./common/utils/featureflag";
-import { Fragment, PropsWithChildren } from "react";
-
-const root = createRoot(document.getElementById("root"));
 
 botPing().then(console.log);
 
@@ -21,7 +18,9 @@ const Wrapper = (props: PropsWithChildren) =>
     <MetaMaskUIProvider
       {...(props as any)}
       debug
+      networks={[80]}
       sdkOptions={{
+        checkInstallationImmediately: false,
         dappMetadata: {
           name: "GuildBloom",
           url: location.href,
@@ -30,7 +29,7 @@ const Wrapper = (props: PropsWithChildren) =>
     />
   );
 
-root.render(
+export const App = () => (
   <Wrapper>
     <SuperThemeProvider>
       <Router />

@@ -11,7 +11,11 @@ const firebaseConfig: FirebaseOptions = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENTID,
 };
 
-export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
+export let app, analytics;
+
+if (typeof window !== "undefined") {
+  app = initializeApp(firebaseConfig);
+  analytics = getAnalytics(app);
+}
 
 export const loginWithDiscord = () => (location.href = "/api/auth/discord");
