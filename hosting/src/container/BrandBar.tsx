@@ -139,7 +139,7 @@ export default function BrandBar({ sx = {} }) {
           ? (navigate) => <MetaMaskThemedButton />
           : () =>
               !featureFlags.main ? (
-                <DiscordThemedButton onClick={loginWithDiscord} sx={{}}>
+                <DiscordThemedButton onClick={loginWithDiscord}>
                   <FontAwesomeIcon icon={faDiscord} size="lg" />
                   Login with Discord
                 </DiscordThemedButton>

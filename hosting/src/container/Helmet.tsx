@@ -20,7 +20,7 @@ export function RouterHelmet({ title = "Discord funding" }) {
       <meta name="robots" content="index, follow" />
 
       {/* <!-- Open Graph meta tags for social media --> */}
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={`${title} • GuildBloom`} />
       <meta
         property="og:description"
         content="Uniting, promoting, and evolving Discord communities everywhere"
@@ -32,7 +32,7 @@ export function RouterHelmet({ title = "Discord funding" }) {
       <meta property="og:url" content={location.href} />
 
       {/* <!-- Canonical URL --> */}
-      <link rel="canonical" href="https://example.com/page"></link>
+      <link rel="canonical" href={location.href}></link>
     </Helmet>
   );
 }

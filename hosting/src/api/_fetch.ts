@@ -5,9 +5,11 @@ function doFetch<T = any>(url, init?: RequestInit): Promise<T> {
       body: init?.body ? JSON.stringify(init.body) : undefined,
       headers: {
         "Content-Type": "application/json",
+        ...init?.headers,
       },
     }).then(async (res) => {
       const data = await res.json();
+
       if (res.ok) {
         resolve(data);
       } else {

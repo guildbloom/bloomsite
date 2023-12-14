@@ -117,32 +117,43 @@ export const Navbar = tags.div<NavbarProps>({
             </Flex>
 
             <Flex className="actions-mobile" align="center">
-              {!open ? (
-                <Button
-                  id="menu"
-                  outline
-                  variant="light"
-                  active={open}
-                  onClick={() => setOpen((x) => !x)}
-                  sx={{ color: themeLight, background: "transparent" }}
-                >
-                  <FontAwesomeIcon size="2x" icon={faCaretDown} />
-                </Button>
+              <Button
+                id="menu"
+                outline
+                variant="light"
+                active={open}
+                onClick={() => setOpen((x) => !x)}
+                sx={{
+                  color: `${themeLight} !important`,
+                  background: "transparent",
+                  ...{
+                    ":hover": {
+                      color: `${themeLight}!important`,
+                    },
+                  },
+                }}
+              >
+                <FontAwesomeIcon
+                  size="2x"
+                  icon={!open ? faCaretDown : faCaretUp}
+                />
+              </Button>
+              {/* {!open ? (<></>
               ) : (
                 <Button
                   id="close"
                   outline
                   onClick={() => setOpen((x) => !x)}
-                  variant="dark"
+                  variant="light"
                   sx={{
-                    color: themeDarkAlt,
+                    color: `${themeLight} !important`,
                     background: "transparent",
                     zIndex: 9999,
                   }}
                 >
                   <FontAwesomeIcon icon={faCaretUp} size="2x" />
                 </Button>
-              )}
+              )} */}
             </Flex>
           </Flex>
 
